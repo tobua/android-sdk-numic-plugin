@@ -43,6 +43,7 @@
     "sdk"
   ],
   "devDependencies": {
+    "@types/semver-sort": "^0.0.1",
     "jest-fixture": "^4.0.2",
     "padua": "^0.6.1",
     "vitest": "^0.26.2"
@@ -63,5 +64,8 @@
   },
   "engines": {
     "node": ">= 14"
+  },
+  "dependencies": {
+    "semver-sort": "^1.0.0"
   }
 }

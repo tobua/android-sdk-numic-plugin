@@ -11,13 +11,40 @@ interface PluginInput {
   options?: Options
 }
 
-export default async ({ nativePath = process.cwd(), options = {} }: PluginInput) => {
+export default async ({
+  nativePath = process.cwd(),
+  // eslint-disable-next-line no-console
+  log = console.log,
+  options = {},
+}: PluginInput) => {
   const androidFolder = join(nativePath, 'android')
 
-  const output = execSync('$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list').toString()
-  const platformToolsVersion = matchVersion(output)
+  const androidHome = execSync('echo $ANDROID_HOME').toString()
 
-  options.buildToolsVersion ||= platformToolsVersion
+  if (!androidHome) {
+    log('Missing $ANDROID_HOME variable in PATH', 'warning')
+    return
+  }
+
+  let output: string
+
+  try {
+    output = execSync(
+      '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed'
+    ).toString()
+  } catch (error) {
+    log(
+      'Failed to run sdkmanager, make sure to install and update the Android SDK Command-line Tools',
+      'warning'
+    )
+    return
+  }
+
+  const matchedInstalledVersions = matchVersion(output)
+
+  options.buildToolsVersion ||= matchedInstalledVersions.buildToolsVersion
+  options.compileSdkVersion ||= matchedInstalledVersions.compileSdkVersion
+  options.targetSdkVersion ||= matchedInstalledVersions.targetSdkVersion
 
   replaceVersions(options, androidFolder)
 }

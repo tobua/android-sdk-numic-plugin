@@ -12,6 +12,8 @@ This plugin requires the project is managed through [numic](https://npmjs.com/nu
 npm i --save-dev android-sdk-numic-plugin
 ```
 
+`buildToolsVersion`, `compileSdkVersion` and `targetSdkVersion` will be set to the newest one installed, while `minSdkVersion` will default to the React Native template unless configured explicitly.
+
 ## Prerequisites
 
 Make sure to update or install the Android SDK CLI Tools. This can be done when opening a project with Android Studio and clicking the icon "SDK Manager" on the top-right.
