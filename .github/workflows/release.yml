@@ -7,13 +7,18 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v3
+      # Legacy peer deps avoids the installation of numic as a peerDependency.
       - run: npm install --legacy-peer-deps
       - name: 🧪 Test
         run: npm test
       - name: 🚧 Build
         run: npm run build
-      - uses: tobua/release-npm-action@v1
+      - run: npm install -g npm@latest
+      - uses: tobua/release-npm-action@v2
         with:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
