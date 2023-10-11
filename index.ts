@@ -30,21 +30,23 @@ export default async ({
 
   try {
     output = execSync(
-      '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed'
+      '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed',
     ).toString()
   } catch (error) {
     log(
-      'Failed to run sdkmanager, make sure to install and update the Android SDK Command-line Tools',
-      'warning'
+      'Failed to run sdkmanager, make sure to install and update the Android SDK Command-line Tools and make sure Android Studio is up-to-date',
+      'warning',
     )
     return
   }
 
   const matchedInstalledVersions = matchVersion(output)
 
-  options.buildToolsVersion ||= matchedInstalledVersions.buildToolsVersion
-  options.compileSdkVersion ||= matchedInstalledVersions.compileSdkVersion
-  options.targetSdkVersion ||= matchedInstalledVersions.targetSdkVersion
+  // Unless user explicitly specifies versions, use installed version or current defaults.
+  options.buildToolsVersion ||= matchedInstalledVersions.buildToolsVersion ?? '34.0.0'
+  options.compileSdkVersion ||= matchedInstalledVersions.compileSdkVersion ?? 34
+  options.targetSdkVersion ||= matchedInstalledVersions.targetSdkVersion ?? 34
+  options.minSdkVersion ||= 21
 
   replaceVersions(options, androidFolder)
 }

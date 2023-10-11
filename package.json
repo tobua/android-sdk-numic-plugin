@@ -25,6 +25,13 @@
   "dependencies": {
     "semver-sort": "^1.0.0"
   },
+  "devDependencies": {
+    "@types/node": "^20.8.4",
+    "@types/semver-sort": "^0.0.2",
+    "jest-fixture": "^4.1.0",
+    "padua": "^2.0.6",
+    "vitest": "^0.34.6"
+  },
   "peerDependencies": {
     "numic": ">= 0.9"
   },
@@ -45,13 +52,6 @@
     "android",
     "sdk"
   ],
-  "devDependencies": {
-    "@types/node": "^20.3.1",
-    "@types/semver-sort": "^0.0.1",
-    "jest-fixture": "^4.0.2",
-    "padua": "^1.3.1",
-    "vitest": "^0.32.0"
-  },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
     "extends": "./node_modules/padua/configuration/eslint.cjs"
@@ -60,6 +60,6 @@
     "provenance": true
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }

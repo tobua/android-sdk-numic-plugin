@@ -33,10 +33,10 @@ The detailed Android SDK versions can be configured in `package.json` under the 
   "name": "my-app",
   "numic": {
     "android-sdk-numic-plugin": {
-      "compileSdkVersion": 33,
-      "targetSdkVersion": 33,
+      "compileSdkVersion": 34,
+      "targetSdkVersion": 34,
       "minSdkVersion": 21,
-      "buildToolsVersion": "33.0.3"
+      "buildToolsVersion": "34.0.0"
     }
   }
 }

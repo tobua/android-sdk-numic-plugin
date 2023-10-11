@@ -11,3 +11,12 @@ test('Extracts the correct versions for various script outputs.', () => {
   expect(compileSdkVersion).toBe(33)
   expect(targetSdkVersion).toBe(33)
 })
+
+test('Extracts the correct versions for android 14.', () => {
+  const macScriptOutput = readFile('test/script/14-mac-installed.txt')
+  const { buildToolsVersion, compileSdkVersion, targetSdkVersion } = matchVersion(macScriptOutput)
+
+  expect(buildToolsVersion).toEqual('34.0.0')
+  expect(compileSdkVersion).toBe(34)
+  expect(targetSdkVersion).toBe(34)
+})
