@@ -1,5 +1,6 @@
 import semverSort from 'semver-sort'
 
+// NOTE No longer used, can differ from compile and target SDK version.
 const findPlatformTools = (sdkManagerListOutput: string) => {
   const matches = [...sdkManagerListOutput.matchAll(/platform-tools\s*\|\s(\d{1,3})/g)]
 
@@ -32,12 +33,17 @@ const findNewestBuildToolsVersion = (sdkManagerListOutput: string) => {
   return sortedVersions[0]
 }
 
+const getMajorFromVersion = (version: string) => {
+  return parseInt(version.split('.')[0], 10)
+}
+
 export const matchVersion = (sdkManagerListOutput: string) => {
-  const platformToolsVersion = findPlatformTools(sdkManagerListOutput)
+  const buildToolsVersion = findNewestBuildToolsVersion(sdkManagerListOutput)
+  const majorSdkVersion = getMajorFromVersion(buildToolsVersion)
 
   return {
-    buildToolsVersion: findNewestBuildToolsVersion(sdkManagerListOutput),
-    compileSdkVersion: platformToolsVersion,
-    targetSdkVersion: platformToolsVersion,
+    buildToolsVersion: buildToolsVersion,
+    compileSdkVersion: majorSdkVersion,
+    targetSdkVersion: majorSdkVersion,
   }
 }

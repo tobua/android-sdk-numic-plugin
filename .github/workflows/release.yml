@@ -11,14 +11,13 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v3
-      # Legacy peer deps avoids the installation of numic as a peerDependency.
-      - run: npm install --legacy-peer-deps
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
       - name: 🧪 Test
-        run: npm test
+        run: bun run test
       - name: 🚧 Build
-        run: npm run build
-      - run: npm install -g npm@latest
-      - uses: tobua/release-npm-action@v2
+        run: bun run build
+      - uses: tobua/release-npm-action@v3
         with:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
