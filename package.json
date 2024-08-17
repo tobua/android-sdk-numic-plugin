@@ -26,11 +26,10 @@
     "semver-sort": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.2",
+    "@types/bun": "^1.1.6",
     "@types/semver-sort": "^0.0.5",
     "jest-fixture": "^4.1.0",
-    "padua": "^4.0.1",
-    "vitest": "^1.6.0"
+    "padua": "^4.0.1"
   },
   "peerDependencies": {
     "numic": ">= 0.9"

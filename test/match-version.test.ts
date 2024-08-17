@@ -1,9 +1,9 @@
-import { expect, test } from 'vitest'
-import { readFile } from 'jest-fixture'
+import { expect, test } from 'bun:test'
+import Bun from 'bun'
 import { matchVersion } from '../match-version'
 
-test('Extracts the correct versions for various script outputs.', () => {
-  const initialMacScriptOutput = readFile('test/script/initial-mac-installed.txt')
+test('Extracts the correct versions for various script outputs.', async () => {
+  const initialMacScriptOutput = await Bun.file('test/script/initial-mac-installed.txt').text()
   const { buildToolsVersion, compileSdkVersion, targetSdkVersion } =
     matchVersion(initialMacScriptOutput)
 
@@ -12,8 +12,17 @@ test('Extracts the correct versions for various script outputs.', () => {
   expect(targetSdkVersion).toBe(33)
 })
 
-test('Extracts the correct versions for android 14.', () => {
-  const macScriptOutput = readFile('test/script/14-mac-installed.txt')
+test('Extracts the correct versions for Android 15.', async () => {
+  const macScriptOutput = await Bun.file('test/script/15-mac-installed.txt').text()
+  const { buildToolsVersion, compileSdkVersion, targetSdkVersion } = matchVersion(macScriptOutput)
+
+  expect(buildToolsVersion).toEqual('35.0.0')
+  expect(compileSdkVersion).toBe(35)
+  expect(targetSdkVersion).toBe(35)
+})
+
+test('Extracts the correct versions for Android 14.', async () => {
+  const macScriptOutput = await Bun.file('test/script/14-mac-installed.txt').text()
   const { buildToolsVersion, compileSdkVersion, targetSdkVersion } = matchVersion(macScriptOutput)
 
   expect(buildToolsVersion).toEqual('34.0.0')
@@ -21,8 +30,8 @@ test('Extracts the correct versions for android 14.', () => {
   expect(targetSdkVersion).toBe(34)
 })
 
-test('Extracts the correct versions for android 14.', () => {
-  const macScriptOutput = readFile('test/script/q2-2024-installed.txt')
+test('Extracts the correct versions for Android 14.', async () => {
+  const macScriptOutput = await Bun.file('test/script/q2-2024-installed.txt').text()
   const { buildToolsVersion, compileSdkVersion, targetSdkVersion } = matchVersion(macScriptOutput)
 
   expect(buildToolsVersion).toEqual('34.0.0')

@@ -1,9 +1,9 @@
 import { join } from 'node:path'
-import { expect, test, beforeEach, afterEach, vi } from 'vitest'
+import { expect, test, beforeEach, afterEach, spyOn } from 'bun:test'
 import { registerVitest, prepare, environment, packageJson, file, readFile } from 'jest-fixture'
 import { replaceVersions } from '../replace-versions'
 
-registerVitest(beforeEach, afterEach, vi)
+registerVitest(beforeEach, afterEach, { spyOn })
 
 const initialBuildGradleContents = readFile('test/build.gradle')
 

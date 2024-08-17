@@ -1,11 +1,11 @@
-import { cpSync, mkdirSync } from 'fs'
-import { join } from 'path'
-import { expect, test, beforeEach, afterEach, vi } from 'vitest'
+import { cpSync, mkdirSync } from 'node:fs'
+import { join } from 'node:path'
+import { expect, test, beforeEach, afterEach, spyOn } from 'bun:test'
 import { registerVitest, prepare, environment, packageJson, readFile } from 'jest-fixture'
 import plugin from '../index'
 
 const initialCwd = process.cwd()
-registerVitest(beforeEach, afterEach, vi)
+registerVitest(beforeEach, afterEach, { spyOn })
 
 environment('sdk')
 

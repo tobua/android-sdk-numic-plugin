@@ -29,9 +29,9 @@ export default async ({
   let output: string
 
   try {
-    output = execSync(
-      '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed',
-    ).toString()
+    output = execSync('$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed', {
+      stdio: 'pipe', // Do not print errors.
+    }).toString()
   } catch (error) {
     log(
       'Failed to run sdkmanager, make sure to install and update the Android SDK Command-line Tools and make sure Android Studio is up-to-date',
