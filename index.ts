@@ -43,10 +43,10 @@ export default async ({
   const matchedInstalledVersions = matchVersion(output)
 
   // Unless user explicitly specifies versions, use installed version or current defaults.
-  options.buildToolsVersion ||= matchedInstalledVersions.buildToolsVersion ?? '34.0.0'
-  options.compileSdkVersion ||= matchedInstalledVersions.compileSdkVersion ?? 34
-  options.targetSdkVersion ||= matchedInstalledVersions.targetSdkVersion ?? 34
-  options.minSdkVersion ||= 23
+  options.buildToolsVersion ||= matchedInstalledVersions.buildToolsVersion ?? '35.0.0'
+  options.compileSdkVersion ||= matchedInstalledVersions.compileSdkVersion ?? 35
+  options.targetSdkVersion ||= matchedInstalledVersions.targetSdkVersion ?? 35
+  options.minSdkVersion ||= 24
 
   replaceVersions(options, androidFolder)
 }

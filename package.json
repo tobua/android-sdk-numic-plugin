@@ -6,9 +6,7 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "build": "padua build",
-    "start": "padua watch",
-    "test": "vitest run"
+    "build": "padua build"
   },
   "padua": {
     "esbuild": {
@@ -26,7 +24,7 @@
     "semver-sort": "^1.0.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.6",
+    "@types/bun": "^1.1.12",
     "@types/semver-sort": "^0.0.5",
     "jest-fixture": "^4.1.0",
     "padua": "^4.0.1"
@@ -57,8 +55,5 @@
   },
   "publishConfig": {
     "provenance": true
-  },
-  "engines": {
-    "node": ">= 18"
   }
 }
